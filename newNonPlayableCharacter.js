@@ -23,25 +23,44 @@ function newNonPlayableCharacter(x, y) {
 
     setInterval(moveCharacter, 1)
 
-    function walkEast() {
-        direction = 'east'
-        element.src = `./assets/red-character/east.gif`
+    function walkTimeout(time,callback){
+        setTimeout(() => {
+            stop();
+            if(callback){
+                callback();
+            }
+        },time);
     }
 
-    function walkNorth() {
-        direction = 'north'
-        element.src = `./assets/red-character/north.gif`
+    function walkDirection(npcDirection, time, callback){
+        direction = npcDirection;
+        element.src = `./assets/red-character/${npcDirection}.gif`;
+        walkTimeout(time,callback);
     }
 
-    function walkWest() {
-        direction = 'west'
-        element.src = `./assets/red-character/west.gif`
-    }
+    // function walkEast(time, callback) {
+    //     direction = 'east'
+    //     element.src = `./assets/red-character/east.gif`
+    //     walkTimeout(time,callback);
+    // }
 
-    function walkSouth() {
-        direction = 'south'
-        element.src = `./assets/red-character/south.gif`
-    }
+    // function walkNorth(time, callback) {
+    //     direction = 'north'
+    //     element.src = `./assets/red-character/north.gif`
+    //     walkTimeout(time,callback);
+    // }
+
+    // function walkWest(time, callback) {
+    //     direction = 'west'
+    //     element.src = `./assets/red-character/west.gif`
+    //     walkTimeout(time,callback);
+    // }
+
+    // function walkSouth(time, callback) {
+    //     direction = 'south'
+    //     element.src = `./assets/red-character/south.gif`
+    //     walkTimeout(time,callback);
+    //}
 
     function stop() {
         direction = null
@@ -50,10 +69,11 @@ function newNonPlayableCharacter(x, y) {
 
     return {
         element: element,
-        walkWest: walkWest,
-        walkNorth: walkNorth,
-        walkEast: walkEast,
-        walkSouth: walkSouth,
+        // walkWest: walkWest,
+        // walkNorth: walkNorth,
+        // walkEast: walkEast,
+        // walkSouth: walkSouth,
+        walkDirection: walkDirection,
         stop: stop
     }
 }
